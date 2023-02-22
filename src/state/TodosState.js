@@ -1,50 +1,23 @@
-const defaultState = []
+import { createSlice } from '@reduxjs/toolkit'
 
-const ADD = 'TODOS@ADD'
-const EDIT = 'TODOS@EDIT'
-const REMOVE = 'TODOS@REMOVE'
+const todosState = createSlice({
+  name: 'todos',
+  initialState: [],
+  reducers: {
+    add: (state, action) => {
+      state.push(action.payload)
+    },
+    remove: (state, action) =>
+      state.filter((todo) => todo.id !== action.payload),
+    edit: (state, action) => {
+      const { id, data } = action.payload
+      const todo = state.find((todo) => todo.id === id)
 
-function addTodos(todo) {
-  return {
-    type: ADD,
-    payload: todo,
-  }
-}
-
-function editTodos(id, data) {
-  return {
-    type: EDIT,
-    payload: {id, data},
-  }
-}
-
-function removeTodos(id) {
-  return {
-    type: REMOVE,
-    payload: id
-  }
-}
-
-function todosReducer(state = defaultState, action) {
-  switch (action.type) {
-    case ADD: {
-      return [...state, action.payload]
-    }
-    case EDIT: {
-      return state.map(todo => {
-        if (todo.id === action.payload.id) {
-          return {...todo, ...action.payload.data}
-        }
-        return todo
+      Object.keys(data).forEach((key) => {
+        todo[key] = data[key]
       })
-    }
-    case REMOVE: {
-      return state.filter(todo => todo.id !== action.payload)
-    }
-    default: {
-      return state
-    }
-  }
-}
+    },
+  },
+})
 
-export { addTodos, removeTodos, editTodos, todosReducer }
+export default todosState

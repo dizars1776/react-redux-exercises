@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { counterReducer } from "./CounterState";
-import { todosReducer } from "./TodosState";
+import counterState from "./CounterState";
+import todosState from "./TodosState";
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
-  todos: todosReducer
+  counter: counterState.reducer,
+  todos: todosState.reducer,
 })
 
 const store = configureStore({ reducer: rootReducer })
