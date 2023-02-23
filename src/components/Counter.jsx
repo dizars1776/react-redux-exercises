@@ -1,5 +1,5 @@
-import { connect } from "react-redux"
-import counterState from "../state/CounterState"
+import { connect } from 'react-redux'
+import counterState from '../state/CounterState'
 
 function Counter(props) {
   return (
@@ -10,7 +10,7 @@ function Counter(props) {
       <div>
         <p>{props.counter}</p>
       </div>
-      <div className='flex flex-row justify-evenly gap-x-1 sm:gap-x-4'>
+      <div className='flex flex-row justify-center w-full gap-x-1 sm:gap-x-4'>
         <button
           onClick={props.onIncrement}
           className='rounded-full bg-cyan-800 hover:bg-cyan-400 text-white hover:text-black px-4 py-1'
@@ -44,9 +44,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onIncrement: () => dispatch(counterState.actions.increment()),
     onDecrement: () => dispatch(counterState.actions.decrement()),
-    onReset: () => dispatch(counterState.actions.reset())
+    onReset: () => dispatch(counterState.actions.reset()),
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter)
-
